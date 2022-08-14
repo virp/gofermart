@@ -14,6 +14,15 @@ func Respond(ctx context.Context, w http.ResponseWriter, data interface{}, statu
 		return nil
 	}
 
+	if msg, ok := data.(string); ok {
+		w.Header().Set("Content-Type", "text/html")
+		w.WriteHeader(statusCode)
+		if _, err := w.Write([]byte(msg)); err != nil {
+			return err
+		}
+		return nil
+	}
+
 	jsonData, err := json.Marshal(data)
 	if err != nil {
 		return err

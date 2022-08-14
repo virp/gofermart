@@ -54,9 +54,7 @@ func Errors(log *zap.SugaredLogger) web.Middleware {
 
 				message = http.StatusText(status)
 
-				w.WriteHeader(status)
-				_, wErr := w.Write([]byte(message))
-				if wErr != nil {
+				if wErr := web.Respond(ctx, w, message, status); err != nil {
 					return wErr
 				}
 
