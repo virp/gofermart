@@ -10,7 +10,7 @@ func New(service string) (*zap.SugaredLogger, error) {
 	config.OutputPaths = []string{"stdout"}
 	config.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
 	config.DisableStacktrace = true
-	config.InitialFields = map[string]any{
+	config.InitialFields = map[string]interface{}{
 		"service": service,
 	}
 

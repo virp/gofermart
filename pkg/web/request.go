@@ -11,7 +11,7 @@ func Param(r *http.Request, key string) string {
 	return chi.URLParamFromCtx(r.Context(), key)
 }
 
-func Decode(r *http.Request, val any) error {
+func Decode(r *http.Request, val interface{}) error {
 	decoder := json.NewDecoder(r.Body)
 	decoder.DisallowUnknownFields()
 	if err := decoder.Decode(val); err != nil {
