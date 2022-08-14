@@ -28,7 +28,7 @@ func Errors(log *zap.SugaredLogger) web.Middleware {
 				var status int
 				var message string
 				switch {
-				case IsBadApiRequestError(err):
+				case IsBadAPIRequestError(err):
 					status = http.StatusBadRequest
 				case errors.Is(err, ErrUserUnauthorized):
 					status = http.StatusUnauthorized
@@ -74,19 +74,19 @@ func Errors(log *zap.SugaredLogger) web.Middleware {
 	return m
 }
 
-type BadApiRequestError struct {
+type BadAPIRequestError struct {
 	Message string
 }
 
-func NewBadApiRequestError(message string) error {
-	return BadApiRequestError{message}
+func NewBadAPIRequestError(message string) error {
+	return BadAPIRequestError{message}
 }
 
-func (e BadApiRequestError) Error() string {
+func (e BadAPIRequestError) Error() string {
 	return e.Message
 }
 
-func IsBadApiRequestError(err error) bool {
-	var e BadApiRequestError
+func IsBadAPIRequestError(err error) bool {
+	var e BadAPIRequestError
 	return errors.As(err, &e)
 }

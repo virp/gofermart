@@ -19,7 +19,7 @@ type Handlers struct {
 func (h Handlers) Register(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	var ru Register
 	if err := web.Decode(r, &ru); err != nil {
-		return middleware.NewBadApiRequestError("decode user register request")
+		return middleware.NewBadAPIRequestError("decode user register request")
 	}
 
 	user, err := h.User.Register(ctx, ru.Login, ru.Password)
@@ -38,7 +38,7 @@ func (h Handlers) Register(ctx context.Context, w http.ResponseWriter, r *http.R
 func (h Handlers) Login(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	var lu Login
 	if err := web.Decode(r, &lu); err != nil {
-		return middleware.NewBadApiRequestError("decode user login request")
+		return middleware.NewBadAPIRequestError("decode user login request")
 	}
 
 	user, err := h.User.Login(ctx, lu.Login, lu.Password)

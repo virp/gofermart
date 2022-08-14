@@ -18,7 +18,7 @@ type Handlers struct {
 func (h Handlers) Withdraw(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	var wd Withdraw
 	if err := web.Decode(r, &wd); err != nil {
-		return middleware.NewBadApiRequestError("decode withdraw request")
+		return middleware.NewBadAPIRequestError("decode withdraw request")
 	}
 
 	v, err := web.GetValues(ctx)
@@ -28,7 +28,7 @@ func (h Handlers) Withdraw(ctx context.Context, w http.ResponseWriter, r *http.R
 
 	orderNumber, err := strconv.Atoi(wd.Order)
 	if err != nil {
-		return middleware.NewBadApiRequestError("withdraw order number not an integer")
+		return middleware.NewBadAPIRequestError("withdraw order number not an integer")
 	}
 
 	_, err = h.Withdrawal.Upload(ctx, orderNumber, wd.Sum, v.UserID)

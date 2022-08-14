@@ -20,12 +20,12 @@ func (h Handlers) Upload(ctx context.Context, w http.ResponseWriter, r *http.Req
 	b, err := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 	if err != nil {
-		return middleware.NewBadApiRequestError("get order upload request body")
+		return middleware.NewBadAPIRequestError("get order upload request body")
 	}
 
 	orderNumber, err := strconv.Atoi(string(b))
 	if err != nil {
-		return middleware.NewBadApiRequestError("order number is not integer")
+		return middleware.NewBadAPIRequestError("order number is not integer")
 	}
 
 	v, err := web.GetValues(ctx)
